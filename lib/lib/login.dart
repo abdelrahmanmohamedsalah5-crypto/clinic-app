@@ -1,26 +1,41 @@
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'home.dart';
 
 class LoginScreen extends StatelessWidget {
   final email = TextEditingController();
   final pass = TextEditingController();
 
-  void login(BuildContext context) async {
-    await FirebaseAuth.instance.signInAnonymously();
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (_) => HomeScreen()),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: ElevatedButton(
-          child: Text("Enter App"),
-          onPressed: () => login(context),
+      appBar: AppBar(title: Text('تسجيل الدخول')),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            TextField(
+              controller: email,
+              decoration: InputDecoration(labelText: 'البريد الإلكتروني'),
+            ),
+            SizedBox(height: 10),
+            TextField(
+              controller: pass,
+              decoration: InputDecoration(labelText: 'كلمة المرور'),
+              obscureText: true,
+            ),
+            SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: () {
+                // انتقال مباشر للصفحة الرئيسية
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => HomeScreen()),
+                );
+              },
+              child: Text('دخول'),
+            ),
+          ],
         ),
       ),
     );

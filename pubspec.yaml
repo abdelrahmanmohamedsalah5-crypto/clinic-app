@@ -1,0 +1,17 @@
+name: clinic_pro
+description: Clinic Booking App
+publish_to: 'none'
+
+environment:
+  sdk: ">=3.0.0 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  firebase_core: ^2.24.0
+  firebase_auth: ^4.16.0
+  cloud_firestore: ^4.13.0
+  google_fonts: ^6.1.0
+
+flutter:
+  uses-material-design: true

@@ -1,42 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'login.dart';
 
-class HomeScreen extends StatelessWidget {
-  final doctors = [
-    {"name": "Dr Ahmed", "spec": "Cardiology"},
-    {"name": "Dr Sara", "spec": "Dentist"},
-  ];
+void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  // تم إيقاف الفايربيز مؤقتاً عشان التطبيق يفتح بدون شاشة بيضاء
+  runApp(MyApp());
+}
 
-  void book(String doctor) {
-    FirebaseFirestore.instance.collection("bookings").add({
-      "doctor": doctor,
-      "time": DateTime.now().toString(),
-    });
-  }
-
+class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text("Smart Clinic")),
-      body: ListView(
-        children: doctors.map((doc) {
-          return Card(
-            child: ListTile(
-              title: Text(doc["name"]!),
-              subtitle: Text(doc["spec"]!),
-              trailing: ElevatedButton(
-                child: Text("Book"),
-                onPressed: () {
-                  book(doc["name"]!);
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text("Booked")),
-                  );
-                },
-              ),
-            ),
-          );
-        }).toList(),
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'Clinic App',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
       ),
+      home: LoginScreen(), 
     );
   }
 }
